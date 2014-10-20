@@ -1,4 +1,4 @@
-class php5-latest {
+class php5 {
 
     if defined(Package['python-software-properties']) == false {
         package { 'python-software-properties': ensure => present }
