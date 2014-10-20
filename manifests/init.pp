@@ -28,7 +28,7 @@ class php5 {
 
     exec { 'php5:apt-get-update':
         path => '/usr/bin',
-        command => 'apt-get update',
+        command => 'apt-get update -y',
         require => [Exec['php5:update-php-add-repository']]
     }
 
@@ -46,7 +46,8 @@ class php5 {
     exec { 'php5:restart':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'service apache2 restart',
-        require => [Exec['php5:mod-rewrite'], File['/var/www/html', '/etc/apache2/apache2.conf']]
+#        require => [Exec['php5:mod-rewrite'], File['/var/www/html', '/etc/apache2/apache2.conf']]
+        require => [Exec['php5:mod-rewrite'], File['/var/www/html']]
     }
 
     file { '/var/www/html':
