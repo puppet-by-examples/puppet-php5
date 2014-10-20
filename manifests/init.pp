@@ -20,33 +20,33 @@ class php5 {
         package { 'lynx-cur': ensure => present }
     }
   
-    exec { 'php5-latest:update-php-add-repository':
+    exec { 'php5:update-php-add-repository':
         command => "add-apt-repository ppa:ondrej/php5",
         path => '/usr/bin:/usr/sbin:/bin',
         require => [Package['python-software-properties']]
     }
 
-    exec { 'php5-latest:apt-get-update':
+    exec { 'php5:apt-get-update':
         path => '/usr/bin',
         command => 'apt-get update',
-        require => [Exec['php5-latest:update-php-add-repository']]
+        require => [Exec['php5:update-php-add-repository']]
     }
 
     package { 'php5':
         ensure => installed,
-        require => [Exec['php5-latest:apt-get-update']]
+        require => [Exec['php5:apt-get-update']]
     }
 
-    exec { 'php5-latest:mod-rewrite':
+    exec { 'php5:mod-rewrite':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'a2enmod rewrite',
         require => [Package['php5']]
     }
 
-    exec { 'php5-latest:restart':
+    exec { 'php5:restart':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'service apache2 restart',
-        require => [Exec['php5-latest:mod-rewrite'], File['/var/www/html', '/etc/apache2/apache2.conf']]
+        require => [Exec['php5:mod-rewrite'], File['/var/www/html', '/etc/apache2/apache2.conf']]
     }
 
     file { '/var/www/html':
