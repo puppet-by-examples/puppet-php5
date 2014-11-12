@@ -78,6 +78,12 @@ class php5 {
 #        require => [Package['php5']]
 #    }
 
+    exec { 'apache-enable-htaccess-files':
+        path => '/usr/bin:/usr/sbin:/bin',
+        command => 'sed -i \'s/AllowOverride None/AllowOverride All/g\' /etc/apache2/apache2.conf',
+        require => [Package['php5']]
+    }
+
     exec { 'php-cli-set-timezone':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'sed -i \'s/^[; ]*date.timezone =.*/date.timezone = Europe\/London/g\' /etc/php5/cli/php.ini',
