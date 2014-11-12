@@ -8,6 +8,14 @@ class php5 {
         package { 'curl': ensure => present }
     }
 
+    if defined(Package['libcurl3']) == false {
+        package { 'libcurl3': ensure => present }
+    }
+
+    if defined(Package['libcurl3-dev']) == false {
+        package { 'libcurl3-dev': ensure => present }
+    }
+
     if defined(Package['acl']) == false {
         package { 'acl': ensure => present }
     }
@@ -35,6 +43,11 @@ class php5 {
     package { 'php5':
         ensure => installed,
         require => [Exec['php5:apt-get-update']]
+    }
+
+    package { 'php5-curl':
+        ensure => installed,
+        require => [Package['libcurl3', 'libcurl3-dev']]
     }
 
     exec { 'php5:mod-rewrite':
