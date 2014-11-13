@@ -47,7 +47,22 @@ class php5 {
 
     package { 'php5-curl':
         ensure => installed,
-        require => [Package['libcurl3', 'libcurl3-dev']]
+        require => [Package['php5', 'libcurl3', 'libcurl3-dev']]
+    }
+
+    package { 'php5-xdebug':
+      ensure => installed,
+      require => Package['php5']
+    }
+
+    package { 'php5-xsl':
+      ensure => installed,
+      require => Package['php5']
+    }
+
+    package { 'php5-mysql':
+      ensure => installed,
+      require => Package['php5']
     }
 
     exec { 'php5:mod-rewrite':
