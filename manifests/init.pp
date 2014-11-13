@@ -8,6 +8,14 @@ class php5 {
         package { 'curl': ensure => present }
     }
 
+    if defined(Package['libcurl3']) == false {
+        package { 'libcurl3': ensure => present }
+    }
+
+    if defined(Package['libcurl3-dev']) == false {
+        package { 'libcurl3-dev': ensure => present }
+    }
+
     if defined(Package['acl']) == false {
         package { 'acl': ensure => present }
     }
@@ -37,6 +45,26 @@ class php5 {
         require => [Exec['php5:apt-get-update']]
     }
 
+    package { 'php5-curl':
+        ensure => installed,
+        require => [Package['php5', 'libcurl3', 'libcurl3-dev']]
+    }
+
+    package { 'php5-xdebug':
+      ensure => installed,
+      require => Package['php5']
+    }
+
+    package { 'php5-xsl':
+      ensure => installed,
+      require => Package['php5']
+    }
+
+    package { 'php5-mysql':
+      ensure => installed,
+      require => Package['php5']
+    }
+
     exec { 'php5:mod-rewrite':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'a2enmod rewrite',
@@ -64,6 +92,12 @@ class php5 {
 #        source => '/vagrant/apache2.conf',
 #        require => [Package['php5']]
 #    }
+
+    exec { 'apache-enable-htaccess-files':
+        path => '/usr/bin:/usr/sbin:/bin',
+        command => 'sed -i \'s/AllowOverride None/AllowOverride All/g\' /etc/apache2/apache2.conf',
+        require => [Package['php5']]
+    }
 
     exec { 'php-cli-set-timezone':
         path => '/usr/bin:/usr/sbin:/bin',
