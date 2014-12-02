@@ -32,6 +32,10 @@ class php5 {
         package { 'apache2-utils': ensure => present }
     }
 
+    if defined(Package['tree']) == false {
+        package { 'tree': ensure => present }
+    }
+
     exec { 'php5:update-php-add-repository':
         command => "add-apt-repository ppa:ondrej/php5",
         path => '/usr/bin:/usr/sbin:/bin',
@@ -124,9 +128,7 @@ class php5 {
 
 #;realpath_cache_ttl = 120
 
-
-
-exec { 'php-cli-disable-short-open-tag':
+    exec { 'php-cli-disable-short-open-tag':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'sed -i \'s/^[; ]*short_open_tag =.*/short_open_tag = Off/g\' /etc/php5/cli/php.ini',
         onlyif => 'test "`php -c /etc/php5/cli/php.ini -r \"echo ini_get(\'short_open_tag\');\"`" = "1"',
