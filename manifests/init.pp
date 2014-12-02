@@ -27,7 +27,11 @@ class php5 {
     if defined(Package['lynx-cur']) == false {
         package { 'lynx-cur': ensure => present }
     }
-  
+
+    if defined(Package['apache2-utils']) == false {
+        package { 'apache2-utils': ensure => present }
+    }
+
     exec { 'php5:update-php-add-repository':
         command => "add-apt-repository ppa:ondrej/php5",
         path => '/usr/bin:/usr/sbin:/bin',
@@ -112,7 +116,17 @@ class php5 {
         require => [Package['php5']]
     }
 
-    exec { 'php-cli-disable-short-open-tag':
+    exec { 'php-apache-realpath-cache-size':
+        path => '/usr/bin:/usr/sbin:/bin',
+        command => 'sed -i \'s/^[; ]*;realpath_cache_size *= *[0-9]+./realpath_cache_size = 2M/g\' /etc/php5/apache/php.ini',
+        require => [Package['php5']]
+    }
+
+#;realpath_cache_ttl = 120
+
+
+
+exec { 'php-cli-disable-short-open-tag':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'sed -i \'s/^[; ]*short_open_tag =.*/short_open_tag = Off/g\' /etc/php5/cli/php.ini',
         onlyif => 'test "`php -c /etc/php5/cli/php.ini -r \"echo ini_get(\'short_open_tag\');\"`" = "1"',
