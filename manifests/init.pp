@@ -122,7 +122,7 @@ class php5 {
 
     exec { 'php-apache-realpath-cache-size':
         path => '/usr/bin:/usr/sbin:/bin',
-        command => 'sed -i \'s/^[; ]*;realpath_cache_size *= *[0-9]+./realpath_cache_size = 2M/g\' /etc/php5/apache/php.ini',
+        command => 'sed -i \'s/^[; ]*;realpath_cache_size *= *[0-9]+./realpath_cache_size = 8M/g\' /etc/php5/apache2/php.ini',
         require => [Package['php5']]
     }
 
