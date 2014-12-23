@@ -76,14 +76,16 @@ class php5 {
     exec { 'php5:mod-rewrite':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'a2enmod rewrite',
-        require => [Package['php5']]
+        require => [Package['php5']],
+        notify  => Exec['php5:restart']
     }
 
     exec { 'php5:restart':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'service apache2 restart',
 #        require => [Exec['php5:mod-rewrite'], File['/var/www/html', '/etc/apache2/apache2.conf']]
-        require => [Exec['php5:mod-rewrite'], File['/var/www/html']]
+#        require => [Exec['php5:mod-rewrite'], File['/var/www/html']]
+        require => [Package['php5']],
     }
 
     file { '/var/www/html':
@@ -91,7 +93,8 @@ class php5 {
         ensure => link,
         force => true,
         target => '/vagrant/web',
-        require => [Package['php5']]
+        require => [Package['php5']],
+        notify  => Exec['php5:restart']
     }
 
 #    file { '/etc/apache2/apache2.conf':
@@ -102,25 +105,28 @@ class php5 {
 #    }
 
     file_line { 'apache_user':
-        path    => '/etc/apache2/httpd.conf',
-        line    => 'User vagrant',
+        path    => '/etc/apache2/envvars',
+        line    => 'export APACHE_RUN_USER=vagrant',
+        match   => 'export APACHE_RUN_USER=www-data',
         require => Package['php5'],
-        notify  => Service['apache2']
+        notify  => Exec['php5:restart']
     }
 
     file_line { 'apache_group':
-        path    => '/etc/apache2/httpd.conf',
-        line    => 'Group vagrant',
+        path    => '/etc/apache2/envvars',
+        line    => 'export APACHE_RUN_GROUP=vagrant',
+        match   => 'export APACHE_RUN_GROUP=www-data',
         require => Package['php5'],
-        notify  => Service['apache2']
+        notify  => Exec['php5:restart']
     }
 
     file_line { 'apache2-enable-htaccess-files':
-        path    => '/etc/apache2/apache2.conf',
-        match   => 'AllowOverride None',
-        line    => 'AllowOverride All',
-        require => Class['php5'],
-        notify  => Service['apache2']
+        path     => '/etc/apache2/apache2.conf',
+        match    => '^\s*AllowOverride None',
+        multiple => true,
+        line     => "\tAllowOverride All",
+        require  => Package['php5'],
+        notify   => Exec['php5:restart']
     }
 
 #    exec { 'apache-enable-htaccess-files':
@@ -135,32 +141,32 @@ class php5 {
         path    => '/etc/php5/apache2/php.ini',
         match   => 'short_open_tag =',
         line    => 'short_open_tag = Off',
-        require => Class['php5'],
-        notify  => Service['apache2']
+        require => Package['php5'],
+        notify  => Exec['php5:restart']
     }
 
     file_line { 'php5_cli_short_open_tag':
         path    => '/etc/php5/cli/php.ini',
         match   => 'short_open_tag =',
         line    => 'short_open_tag = Off',
-        require => Class['php5'],
-        notify  => Service['apache2']
+        require => Package['php5'],
+        notify  => Exec['php5:restart']
     }
 
     file_line { 'php5_apache2_date_timezone':
         path    => '/etc/php5/apache2/php.ini',
         match   => 'date.timezone =',
         line    => 'date.timezone = Europe/Warsaw',
-        require => Class['php5'],
-        notify  => Service['apache2']
+        require => Package['php5'],
+        notify  => Exec['php5:restart']
     }
 
     file_line { 'php5_cli_date_timezone':
         path    => '/etc/php5/cli/php.ini',
         match   => 'date.timezone =',
         line    => 'date.timezone = Europe/Warsaw',
-        require => Class['php5'],
-        notify  => Service['apache2']
+        require => Package['php5'],
+        notify  => Exec['php5:restart']
     }
 
 #    exec { 'php-cli-set-timezone':
@@ -186,16 +192,16 @@ class php5 {
         path  => '/etc/php5/apache2/php.ini',
         match => 'realpath_cache_size =',
         line  => 'realpath_cache_size = 8M',
-        require => Class['php5'],
-        notify  => Service['apache2']
+        require => Package['php5'],
+        notify  => Exec['php5:restart']
     }
 
     file_line { 'php-apache-realpath-cache-ttl':
         path  => '/etc/php5/apache2/php.ini',
         match => 'realpath_cache_ttl =',
         line  => 'realpath_cache_ttl = 7200',
-        require => Class['php5'],
-        notify  => Service['apache2']
+        require => Package['php5'],
+        notify  => Exec['php5:restart']
     }
 
 #;realpath_cache_ttl = 120
