@@ -43,23 +43,23 @@ class php5 {
     exec { 'php5:update-php-add-repository':
         command => "add-apt-repository ppa:ondrej/php5",
         path => '/usr/bin:/usr/sbin:/bin',
-        require => [Package['python-software-properties']]
+        require => Package['python-software-properties']
     }
 
     exec { 'php5:apt-get-update':
         path => '/usr/bin',
         command => 'apt-get update -y',
-        require => [Exec['php5:update-php-add-repository']]
+        require => Exec['php5:update-php-add-repository']
     }
 
     package { 'php5':
         ensure => installed,
-        require => [Exec['php5:apt-get-update']]
+        require => Exec['php5:apt-get-update']
     }
 
     package { 'php5-curl':
         ensure => installed,
-        require => [Package['php5', 'libcurl3', 'libcurl3-dev']]
+        require => Package['php5', 'libcurl3', 'libcurl3-dev']
     }
 
     package { 'php5-xdebug':
@@ -80,14 +80,14 @@ class php5 {
     exec { 'php5:mod-rewrite':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'a2enmod rewrite',
-        require => [Package['php5']],
+        require => Package['php5'],
         notify  => Exec['php5:restart']
     }
 
     exec { 'php5:restart':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'service apache2 restart',
-        require => [Package['php5']],
+        require => Package['php5']
     }
 
     file_line { 'apache_user':
