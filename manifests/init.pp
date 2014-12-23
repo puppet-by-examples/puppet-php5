@@ -101,38 +101,110 @@ class php5 {
 #        require => [Package['php5']]
 #    }
 
-    exec { 'apache-enable-htaccess-files':
-        path => '/usr/bin:/usr/sbin:/bin',
-        command => 'sed -i \'s/AllowOverride None/AllowOverride All/g\' /etc/apache2/apache2.conf',
-        require => [Package['php5']]
+    file_line { 'apache_user':
+        path    => '/etc/apache2/httpd.conf',
+        line    => 'User vagrant',
+        require => Package['php5'],
+        notify  => Service['apache2']
     }
 
-    exec { 'php-cli-set-timezone':
-        path => '/usr/bin:/usr/sbin:/bin',
-        command => 'sed -i \'s/^[; ]*date.timezone =.*/date.timezone = Europe\/London/g\' /etc/php5/cli/php.ini',
-        onlyif => 'test "`php -c /etc/php5/cli/php.ini -r \"echo ini_get(\'date.timezone\');\"`" = ""',
-        require => [Package['php5']]
+    file_line { 'apache_group':
+        path    => '/etc/apache2/httpd.conf',
+        line    => 'Group vagrant',
+        require => Package['php5'],
+        notify  => Service['apache2']
     }
 
-    exec { 'php-cli-set-phar-options':
-        path => '/usr/bin:/usr/sbin:/bin',
-        command => 'sed -i \'s/^[; ]*;phar.readonly *= *.*/phar.readonly = 0/g\' /etc/php5/cli/php.ini',
-        require => [Package['php5']]
+    file_line { 'apache2-enable-htaccess-files':
+        path    => '/etc/apache2/apache2.conf',
+        match   => 'AllowOverride None',
+        line    => 'AllowOverride All',
+        require => Class['php5'],
+        notify  => Service['apache2']
     }
 
-    exec { 'php-apache-realpath-cache-size':
-        path => '/usr/bin:/usr/sbin:/bin',
-        command => 'sed -i \'s/^[; ]*;realpath_cache_size *= *[0-9]+./realpath_cache_size = 8M/g\' /etc/php5/apache2/php.ini',
-        require => [Package['php5']]
+#    exec { 'apache-enable-htaccess-files':
+#        path => '/usr/bin:/usr/sbin:/bin',
+#        command => 'sed -i \'s/AllowOverride None/AllowOverride All/g\' /etc/apache2/apache2.conf',
+#        require => [Package['php5']]
+#    }
+
+# https://github.com/symfony/symfony-standard/blob/e8bffd160e3e73423565f5eba68a8b77f04c6f99/vagrant/puppet/manifests/symfony.pp
+
+    file_line { 'php5_apache2_short_open_tag':
+        path    => '/etc/php5/apache2/php.ini',
+        match   => 'short_open_tag =',
+        line    => 'short_open_tag = Off',
+        require => Class['php5'],
+        notify  => Service['apache2']
+    }
+
+    file_line { 'php5_cli_short_open_tag':
+        path    => '/etc/php5/cli/php.ini',
+        match   => 'short_open_tag =',
+        line    => 'short_open_tag = Off',
+        require => Class['php5'],
+        notify  => Service['apache2']
+    }
+
+    file_line { 'php5_apache2_date_timezone':
+        path    => '/etc/php5/apache2/php.ini',
+        match   => 'date.timezone =',
+        line    => 'date.timezone = Europe/Warsaw',
+        require => Class['php5'],
+        notify  => Service['apache2']
+    }
+
+    file_line { 'php5_cli_date_timezone':
+        path    => '/etc/php5/cli/php.ini',
+        match   => 'date.timezone =',
+        line    => 'date.timezone = Europe/Warsaw',
+        require => Class['php5'],
+        notify  => Service['apache2']
+    }
+
+#    exec { 'php-cli-set-timezone':
+#        path => '/usr/bin:/usr/sbin:/bin',
+#        command => 'sed -i \'s/^[; ]*date.timezone =.*/date.timezone = Europe\/London/g\' /etc/php5/cli/php.ini',
+#        onlyif => 'test "`php -c /etc/php5/cli/php.ini -r \"echo ini_get(\'date.timezone\');\"`" = ""',
+#        require => [Package['php5']]
+#    }
+
+#    exec { 'php-cli-set-phar-options':
+#        path => '/usr/bin:/usr/sbin:/bin',
+#        command => 'sed -i \'s/^[; ]*;phar.readonly *= *.*/phar.readonly = 0/g\' /etc/php5/cli/php.ini',
+#        require => [Package['php5']]
+#    }
+
+#    exec { 'php-apache-realpath-cache-size':
+#        path => '/usr/bin:/usr/sbin:/bin',
+#        command => 'sed -i \'s/^[; ]*;realpath_cache_size *= *[0-9]+./realpath_cache_size = 8M/g\' /etc/php5/apache2/php.ini',
+#        require => [Package['php5']]
+#    }
+
+    file_line { 'php-apache-realpath-cache-size':
+        path  => '/etc/php5/apache2/php.ini',
+        match => 'realpath_cache_size =',
+        line  => 'realpath_cache_size = 8M',
+        require => Class['php5'],
+        notify  => Service['apache2']
+    }
+
+    file_line { 'php-apache-realpath-cache-ttl':
+        path  => '/etc/php5/apache2/php.ini',
+        match => 'realpath_cache_ttl =',
+        line  => 'realpath_cache_ttl = 7200',
+        require => Class['php5'],
+        notify  => Service['apache2']
     }
 
 #;realpath_cache_ttl = 120
 
-    exec { 'php-cli-disable-short-open-tag':
-        path => '/usr/bin:/usr/sbin:/bin',
-        command => 'sed -i \'s/^[; ]*short_open_tag =.*/short_open_tag = Off/g\' /etc/php5/cli/php.ini',
-        onlyif => 'test "`php -c /etc/php5/cli/php.ini -r \"echo ini_get(\'short_open_tag\');\"`" = "1"',
-        require => [Package['php5']]
-    }
+#    exec { 'php-cli-disable-short-open-tag':
+#        path => '/usr/bin:/usr/sbin:/bin',
+#        command => 'sed -i \'s/^[; ]*short_open_tag =.*/short_open_tag = Off/g\' /etc/php5/cli/php.ini',
+#        onlyif => 'test "`php -c /etc/php5/cli/php.ini -r \"echo ini_get(\'short_open_tag\');\"`" = "1"',
+#        require => [Package['php5']]
+#    }
 
 }
