@@ -36,6 +36,10 @@ class php5 {
         package { 'tree': ensure => present }
     }
 
+#    if defined(Package['mc']) == false {
+#        package { 'mc': ensure => present }
+#    }
+
     exec { 'php5:update-php-add-repository':
         command => "add-apt-repository ppa:ondrej/php5",
         path => '/usr/bin:/usr/sbin:/bin',
