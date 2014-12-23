@@ -36,9 +36,9 @@ class php5 {
         package { 'tree': ensure => present }
     }
 
-#    if defined(Package['mc']) == false {
-#        package { 'mc': ensure => present }
-#    }
+    if defined(Package['mc']) == false {
+        package { 'mc': ensure => present }
+    }
 
     exec { 'php5:update-php-add-repository':
         command => "add-apt-repository ppa:ondrej/php5",
@@ -87,26 +87,8 @@ class php5 {
     exec { 'php5:restart':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'service apache2 restart',
-#        require => [Exec['php5:mod-rewrite'], File['/var/www/html', '/etc/apache2/apache2.conf']]
-#        require => [Exec['php5:mod-rewrite'], File['/var/www/html']]
         require => [Package['php5']],
     }
-
-    file { '/var/www/html':
-        path => '/var/www/html',
-        ensure => link,
-        force => true,
-        target => '/vagrant/web',
-        require => [Package['php5']],
-        notify  => Exec['php5:restart']
-    }
-
-#    file { '/etc/apache2/apache2.conf':
-#        ensure => file,
-#        mode   => 644,
-#        source => '/vagrant/apache2.conf',
-#        require => [Package['php5']]
-#    }
 
     file_line { 'apache_user':
         path    => '/etc/apache2/envvars',
@@ -132,14 +114,6 @@ class php5 {
         require  => Package['php5'],
         notify   => Exec['php5:restart']
     }
-
-#    exec { 'apache-enable-htaccess-files':
-#        path => '/usr/bin:/usr/sbin:/bin',
-#        command => 'sed -i \'s/AllowOverride None/AllowOverride All/g\' /etc/apache2/apache2.conf',
-#        require => [Package['php5']]
-#    }
-
-# https://github.com/symfony/symfony-standard/blob/e8bffd160e3e73423565f5eba68a8b77f04c6f99/vagrant/puppet/manifests/symfony.pp
 
     file_line { 'php5_apache2_short_open_tag':
         path    => '/etc/php5/apache2/php.ini',
@@ -173,25 +147,6 @@ class php5 {
         notify  => Exec['php5:restart']
     }
 
-#    exec { 'php-cli-set-timezone':
-#        path => '/usr/bin:/usr/sbin:/bin',
-#        command => 'sed -i \'s/^[; ]*date.timezone =.*/date.timezone = Europe\/London/g\' /etc/php5/cli/php.ini',
-#        onlyif => 'test "`php -c /etc/php5/cli/php.ini -r \"echo ini_get(\'date.timezone\');\"`" = ""',
-#        require => [Package['php5']]
-#    }
-
-#    exec { 'php-cli-set-phar-options':
-#        path => '/usr/bin:/usr/sbin:/bin',
-#        command => 'sed -i \'s/^[; ]*;phar.readonly *= *.*/phar.readonly = 0/g\' /etc/php5/cli/php.ini',
-#        require => [Package['php5']]
-#    }
-
-#    exec { 'php-apache-realpath-cache-size':
-#        path => '/usr/bin:/usr/sbin:/bin',
-#        command => 'sed -i \'s/^[; ]*;realpath_cache_size *= *[0-9]+./realpath_cache_size = 8M/g\' /etc/php5/apache2/php.ini',
-#        require => [Package['php5']]
-#    }
-
     file_line { 'php-apache-realpath-cache-size':
         path  => '/etc/php5/apache2/php.ini',
         match => 'realpath_cache_size =',
@@ -207,14 +162,5 @@ class php5 {
         require => Package['php5'],
         notify  => Exec['php5:restart']
     }
-
-#;realpath_cache_ttl = 120
-
-#    exec { 'php-cli-disable-short-open-tag':
-#        path => '/usr/bin:/usr/sbin:/bin',
-#        command => 'sed -i \'s/^[; ]*short_open_tag =.*/short_open_tag = Off/g\' /etc/php5/cli/php.ini',
-#        onlyif => 'test "`php -c /etc/php5/cli/php.ini -r \"echo ini_get(\'short_open_tag\');\"`" = "1"',
-#        require => [Package['php5']]
-#    }
 
 }
