@@ -102,7 +102,7 @@ class php5 (
 
     file_line { 'apache_group':
         path    => '/etc/apache2/envvars',
-        line    => 'export APACHE_RUN_GROUP=${username}',
+        line    => "export APACHE_RUN_GROUP=${username}",
         match   => 'export APACHE_RUN_GROUP=www-data',
         require => Package['php5'],
         notify  => Exec['php5:restart']
