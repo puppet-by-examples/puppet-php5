@@ -1,4 +1,6 @@
-class php5 {
+class php5 (
+  $username = 'vagrant'
+) {
 
     if defined(Package['python-software-properties']) == false {
         package { 'python-software-properties': ensure => present }
@@ -92,7 +94,7 @@ class php5 {
 
     file_line { 'apache_user':
         path    => '/etc/apache2/envvars',
-        line    => 'export APACHE_RUN_USER=vagrant',
+        line    => "export APACHE_RUN_USER=${username}",
         match   => 'export APACHE_RUN_USER=www-data',
         require => Package['php5'],
         notify  => Exec['php5:restart']
@@ -100,7 +102,7 @@ class php5 {
 
     file_line { 'apache_group':
         path    => '/etc/apache2/envvars',
-        line    => 'export APACHE_RUN_GROUP=vagrant',
+        line    => 'export APACHE_RUN_GROUP=${username}',
         match   => 'export APACHE_RUN_GROUP=www-data',
         require => Package['php5'],
         notify  => Exec['php5:restart']
