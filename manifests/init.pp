@@ -1,5 +1,5 @@
 class php5 (
-  $username = 'vagrant'
+    $username = 'vagrant'
 ) {
 
     if defined(Package['python-software-properties']) == false {
@@ -43,51 +43,51 @@ class php5 (
     }
 
     exec { 'php5:update-php-add-repository':
-        command => "add-apt-repository ppa:ondrej/php5",
-        path => '/usr/bin:/usr/sbin:/bin',
+        command => 'add-apt-repository ppa:ondrej/php5',
+        path    => '/usr/bin:/usr/sbin:/bin',
         require => Package['python-software-properties']
     }
 
     exec { 'php5:apt-get-update':
-        path => '/usr/bin',
+        path    => '/usr/bin',
         command => 'apt-get update -y',
         require => Exec['php5:update-php-add-repository']
     }
 
     package { 'php5':
-        ensure => installed,
+        ensure  => installed,
         require => Exec['php5:apt-get-update']
     }
 
     package { 'php5-curl':
-        ensure => installed,
+        ensure  => installed,
         require => Package['php5', 'libcurl3', 'libcurl3-dev']
     }
 
     package { 'php5-xdebug':
-      ensure => installed,
-      require => Package['php5']
+        ensure  => installed,
+        require => Package['php5']
     }
 
     package { 'php5-xsl':
-      ensure => installed,
-      require => Package['php5']
+        ensure  => installed,
+        require => Package['php5']
     }
 
     package { 'php5-mysql':
-      ensure => installed,
-      require => Package['php5']
+        ensure  => installed,
+        require => Package['php5']
     }
 
     exec { 'php5:mod-rewrite':
-        path => '/usr/bin:/usr/sbin:/bin',
+        path    => '/usr/bin:/usr/sbin:/bin',
         command => 'a2enmod rewrite',
         require => Package['php5'],
         notify  => Exec['php5:restart']
     }
 
     exec { 'php5:restart':
-        path => '/usr/bin:/usr/sbin:/bin',
+        path    => '/usr/bin:/usr/sbin:/bin',
         command => 'service apache2 restart',
         require => Package['php5']
     }
@@ -150,17 +150,17 @@ class php5 (
     }
 
     file_line { 'php-apache-realpath-cache-size':
-        path  => '/etc/php5/apache2/php.ini',
-        match => 'realpath_cache_size =',
-        line  => 'realpath_cache_size = 8M',
+        path    => '/etc/php5/apache2/php.ini',
+        match   => 'realpath_cache_size =',
+        line    => 'realpath_cache_size = 8M',
         require => Package['php5'],
         notify  => Exec['php5:restart']
     }
 
     file_line { 'php-apache-realpath-cache-ttl':
-        path  => '/etc/php5/apache2/php.ini',
-        match => 'realpath_cache_ttl =',
-        line  => 'realpath_cache_ttl = 7200',
+        path    => '/etc/php5/apache2/php.ini',
+        match   => 'realpath_cache_ttl =',
+        line    => 'realpath_cache_ttl = 7200',
         require => Package['php5'],
         notify  => Exec['php5:restart']
     }

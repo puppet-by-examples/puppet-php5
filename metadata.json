@@ -5,12 +5,13 @@
     "author": "Włodzimierz Gajda",
     "license": "MIT",
     "project_page": "https://github.com/pro-vagrant/puppet-php5",
+    "issues_url": "https://github.com/pro-vagrant/puppet-php5/issues",
     "summary": "The module to install php5",
     "operatingsystem_support": [
       {
         "operatingsystem": "Ubuntu",
         "operatingsystemrelease": [
-          "12.04"
+          "12.04", "14.04"
         ]
       }
     ],
