@@ -1,8 +1,0 @@
-name    'gajdaw-php5'
-version '0.1.4'
-source 'git://github.com/pro-vagrant/puppet-php5.git'
-author ' Włodzimierz Gajda'
-license 'MIT'
-summary 'The module to install php5'
-description 'The module to install php5'
-project_page 'https://github.com/puppet-by-examples/puppet-php5'
