@@ -2,7 +2,7 @@
   "name": "gajdaw-php5",
   "version": "0.1.5",
   "author": "Włodzimierz Gajda",
-  "summary": "The module to install php5",
+  "summary": "Puppet module to install php5",
   "license": "MIT",
   "source": "https://github.com/puppet-by-examples/puppet-php5",
   "project_page": "https://github.com/puppet-by-examples/puppet-php5",
