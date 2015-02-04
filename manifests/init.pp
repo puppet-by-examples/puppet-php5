@@ -149,4 +149,12 @@ class php5 (
         notify  => Exec['php5:restart']
     }
 
+    file_line { 'php-cli-phar-readonly':
+        path    => '/etc/php5/cli/php.ini',
+        match   => ';phar.readonly = On',
+        line    => 'phar.readonly = Off',
+        require => Package['php5'],
+        notify  => Exec['php5:restart']
+    }
+
 }
