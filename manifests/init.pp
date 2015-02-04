@@ -26,22 +26,6 @@ class php5 (
         package { 'git': ensure => present }
     }
 
-    if defined(Package['lynx-cur']) == false {
-        package { 'lynx-cur': ensure => present }
-    }
-
-    if defined(Package['apache2-utils']) == false {
-        package { 'apache2-utils': ensure => present }
-    }
-
-    if defined(Package['tree']) == false {
-        package { 'tree': ensure => present }
-    }
-
-    if defined(Package['mc']) == false {
-        package { 'mc': ensure => present }
-    }
-
     exec { 'php5:update-php-add-repository':
         command => 'add-apt-repository ppa:ondrej/php5',
         path    => '/usr/bin:/usr/sbin:/bin',
