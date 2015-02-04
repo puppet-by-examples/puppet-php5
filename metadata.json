@@ -1,22 +1,30 @@
 {
-    "name": "gajdaw-php5",
-    "version": "0.1.4",
-    "source": "https://github.com/puppet-by-examples/puppet-php5",
-    "author": "Włodzimierz Gajda",
-    "license": "MIT",
-    "project_page": "https://github.com/puppet-by-examples/puppet-php5",
-    "issues_url": "https://github.com/puppet-by-examples/puppet-php5/issues",
-    "summary": "The module to install php5",
-    "operatingsystem_support": [
-      {
-        "operatingsystem": "Ubuntu",
-        "operatingsystemrelease": [
-          "12.04", "14.04"
-        ]
-      }
-    ],
-    "requirements": [
-      { "name": "puppet", "version_requirement": "3.x" }
-    ],
-    "dependencies": []
+  "name": "gajdaw-php5",
+  "version": "0.1.4",
+  "author": "Włodzimierz Gajda",
+  "summary": "The module to install php5",
+  "license": "MIT",
+  "source": "https://github.com/puppet-by-examples/puppet-php5",
+  "project_page": "https://github.com/puppet-by-examples/puppet-php5",
+  "issues_url": "https://github.com/puppet-by-examples/puppet-php5/issues",
+  "tags": [
+    "php",
+    "php5",
+    "cli",
+    "php5-cli",
+    "command line"
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "12.04",
+        "14.04"
+      ]
+    }
+  ],
+  "requirements": [
+    { "name": "puppet", "version_requirement": "3.x" }
+  ],
+  "dependencies": []
 }
