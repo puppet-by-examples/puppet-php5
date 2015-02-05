@@ -20,10 +20,6 @@ class php5 {
         package { 'acl': ensure => present }
     }
 
-    if defined(Package['git']) == false {
-        package { 'git': ensure => present }
-    }
-
     exec { 'php5:update-php-add-repository':
         command => 'add-apt-repository ppa:ondrej/php5',
         path    => '/usr/bin:/usr/sbin:/bin',
@@ -66,7 +62,6 @@ class php5 {
         match   => 'short_open_tag =',
         line    => 'short_open_tag = Off',
         require => Package['php5'],
-        notify  => Service['apache2'],
     }
 
     file_line { 'php5_cli_short_open_tag':
@@ -81,7 +76,6 @@ class php5 {
         match   => 'date.timezone =',
         line    => 'date.timezone = Europe/Warsaw',
         require => Package['php5'],
-        notify  => Service['apache2'],
     }
 
     file_line { 'php5_cli_date_timezone':
@@ -96,7 +90,6 @@ class php5 {
         match   => 'realpath_cache_size =',
         line    => 'realpath_cache_size = 8M',
         require => Package['php5'],
-        notify  => Service['apache2'],
     }
 
     file_line { 'php-apache-realpath-cache-ttl':
@@ -104,7 +97,6 @@ class php5 {
         match   => 'realpath_cache_ttl =',
         line    => 'realpath_cache_ttl = 7200',
         require => Package['php5'],
-        notify  => Service['apache2'],
     }
 
     file_line { 'php-cli-phar-readonly':
