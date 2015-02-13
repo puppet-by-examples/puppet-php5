@@ -1,0 +1,89 @@
+
+
+#
+# Log produced by: puppet-modules-factory
+# For more info: https://github.com/puppet-by-examples/puppet-modules-factory
+#
+
+
+start_date: 2015-02-13
+start_time: 16:41:29
+module: gajdaw-php5
+version: v0.1.8
+testsuite: tests/gajdaw-php5/*
+testfiles: 'tests/gajdaw-php5/ubuntu-12-04 tests/gajdaw-php5/ubuntu-14-04'
+
+tests:
+
+
+    -
+        start_date: 2015-02-13
+        start_time: 16:41:29
+        vagrantfile: tests/gajdaw-php5/ubuntu-12-04
+        output: '
+
+Ubuntu
+12.04
+
+[mNotice: Compiled catalog for vagrant-ubuntu-precise-32 in environment production in 0.44 seconds[0m
+[mNotice: /Stage[main]/Php5/Package[libcurl3-dev]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/Package[acl]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/Exec[php5:update-php-add-repository]/returns: executed successfully[0m
+[mNotice: /Stage[main]/Php5/Exec[php5:apt-get-update]/returns: executed successfully[0m
+[mNotice: /Stage[main]/Php5/Package[php5]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/Package[php5-mysql]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-size]/ensure: created[0m
+[mNotice: /Stage[main]/Php5/File_line[php5_cli_date_timezone]/ensure: created[0m
+[mNotice: /Stage[main]/Php5/Package[php5-xdebug]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/Package[php5-xsl]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/File_line[php5_apache2_date_timezone]/ensure: created[0m
+[mNotice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-ttl]/ensure: created[0m
+[mNotice: /Stage[main]/Php5/File_line[php-cli-phar-readonly]/ensure: created[0m
+[mNotice: /Stage[main]/Php5/Package[php5-curl]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: Finished catalog run in 46.29 seconds[0m
+PHP 5.5.21-1+deb.sury.org~precise+2 (cli) (built: Jan 26 2015 20:02:58) 
+Copyright (c) 1997-2014 The PHP Group
+Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
+    with Zend OPcache v7.0.4-dev, Copyright (c) 1999-2014, by Zend Technologies
+    with Xdebug v2.2.5, Copyright (c) 2002-2014, by Derick Rethans
+
+        '
+
+    -
+        start_date: 2015-02-13
+        start_time: 16:43:20
+        vagrantfile: tests/gajdaw-php5/ubuntu-14-04
+        output: '
+
+Ubuntu
+14.04
+
+[mNotice: Compiled catalog for vagrant-ubuntu-trusty-32 in environment production in 0.41 seconds[0m
+[mNotice: /Stage[main]/Php5/Package[python-software-properties]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/Package[libcurl3-dev]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/Package[acl]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/Exec[php5:update-php-add-repository]/returns: executed successfully[0m
+[mNotice: /Stage[main]/Php5/Exec[php5:apt-get-update]/returns: executed successfully[0m
+[mNotice: /Stage[main]/Php5/Package[php5]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/Package[php5-mysql]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-size]/ensure: created[0m
+[mNotice: /Stage[main]/Php5/File_line[php5_cli_date_timezone]/ensure: created[0m
+[mNotice: /Stage[main]/Php5/Package[php5-xdebug]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/Package[php5-xsl]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Php5/File_line[php5_apache2_date_timezone]/ensure: created[0m
+[mNotice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-ttl]/ensure: created[0m
+[mNotice: /Stage[main]/Php5/File_line[php-cli-phar-readonly]/ensure: created[0m
+[mNotice: /Stage[main]/Php5/Package[php5-curl]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: Finished catalog run in 55.31 seconds[0m
+PHP 5.5.21-1+deb.sury.org~trusty+2 (cli) (built: Jan 26 2015 19:57:38) 
+Copyright (c) 1997-2014 The PHP Group
+Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
+    with Zend OPcache v7.0.4-dev, Copyright (c) 1999-2014, by Zend Technologies
+    with Xdebug v2.2.5, Copyright (c) 2002-2014, by Derick Rethans
+
+        '
+
+
+
+stop_date: 2015-02-13
+stop_time: 16:44:56
