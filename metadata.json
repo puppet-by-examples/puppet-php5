@@ -1,6 +1,6 @@
 {
   "name": "gajdaw-php5",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "author": "Włodzimierz Gajda",
   "summary": "Puppet module to install php5",
   "license": "MIT",
