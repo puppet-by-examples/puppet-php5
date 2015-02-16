@@ -44,25 +44,14 @@ class php5 {
         require => Exec['php5:apt-get-update']
     }
 
-    package { 'php5-curl':
-        ensure  => installed,
-        require => Package['php5']
-    }
+    $modules = [
+        'php5-curl',
+        'php5-xdebug',
+        'php5-xsl',
+        'php5-mysql'
+    ]
 
-    package { 'php5-xdebug':
-        ensure  => installed,
-        require => Package['php5']
-    }
-
-    package { 'php5-xsl':
-        ensure  => installed,
-        require => Package['php5']
-    }
-
-    package { 'php5-mysql':
-        ensure  => installed,
-        require => Package['php5']
-    }
+    ensure_packages($modules)
 
     file_line { 'php5_apache2_short_open_tag':
         path    => '/etc/php5/apache2/php.ini',
