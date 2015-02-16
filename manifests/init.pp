@@ -1,29 +1,29 @@
 class php5 {
 
-    if defined(Package['python-software-properties']) == false {
-        package { 'python-software-properties': ensure => present }
+    # validate_platform() function comes from
+    # puppet module gajdaw/diverse_functions
+    #
+    #     https://forge.puppetlabs.com/gajdaw/diverse_functions
+    #
+    if !validate_platform($module_name) {
+        fail("Platform not supported in module '${module_name}'.")
     }
 
-    if defined(Package['curl']) == false {
-        package { 'curl': ensure => present }
-    }
+    Exec { path => [
+        '/usr/local/sbin',
+        '/usr/local/bin',
+        '/usr/sbin',
+        '/usr/bin',
+        '/sbin',
+        '/bin'
+    ]}
 
-    if defined(Package['libcurl3']) == false {
-        package { 'libcurl3': ensure => present }
-    }
-
-    if defined(Package['libcurl3-dev']) == false {
-        package { 'libcurl3-dev': ensure => present }
-    }
-
-    if defined(Package['acl']) == false {
-        package { 'acl': ensure => present }
-    }
+    class { 'php5::prerequisites': }
 
     exec { 'php5:update-php-add-repository':
         command => 'add-apt-repository ppa:ondrej/php5',
         path    => '/usr/bin:/usr/sbin:/bin',
-        require => Package['python-software-properties']
+        require => Class['php5::prerequisites']
     }
 
     exec { 'php5:apt-get-update':

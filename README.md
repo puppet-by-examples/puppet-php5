@@ -1,8 +1,31 @@
-#php5 module
+# Puppet Module
+# `gajdaw/php5`
 
-The module to install php5.
+#### Table of Contents
 
-The module was tested in:
+1. [Overview](#overview)
+2. [Setup](#setup)
+3. [Usage](#usage)
+4. [Limitations](#limitations)
 
-* ubuntu 12.04 (precise32 Vagrant box)
-* ubuntu 14.04 (trusty32 Vagrant box)
+## Overview
+
+The module installs php5 using `ppa:ondrej/php5` repository.
+
+## Setup
+
+To install the module run:
+
+    sudo puppet install module gajdaw-php5
+
+## Usage
+
+You can use the module running the following command:
+
+    sudo puppet apply -e 'include php5'
+
+The examples are located in `examples/` directory.
+
+## Limitations
+
+The module was tested on all the platforms that appear in `metadata.json`.
