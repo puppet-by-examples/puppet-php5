@@ -12,6 +12,10 @@
 
 The module installs php5 using `ppa:ondrej/php5` repository.
 
+**CAUTION**
+
+This module manages in fact both: `php5` and `apache`!
+
 ## Setup
 
 To install the module run:
