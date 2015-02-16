@@ -1,3 +1,12 @@
+# == Class: php5
+#
+# Class to install php5 from ppa:ondrej/php5.
+#
+# Parameters:
+#
+# None
+#
+
 class php5 {
 
     # validate_platform() function comes from
@@ -22,12 +31,10 @@ class php5 {
 
     exec { 'php5:update-php-add-repository':
         command => 'add-apt-repository ppa:ondrej/php5',
-        path    => '/usr/bin:/usr/sbin:/bin',
         require => Class['php5::prerequisites']
     }
 
     exec { 'php5:apt-get-update':
-        path    => '/usr/bin',
         command => 'apt-get update -y',
         require => Exec['php5:update-php-add-repository']
     }
@@ -37,25 +44,14 @@ class php5 {
         require => Exec['php5:apt-get-update']
     }
 
-    package { 'php5-curl':
-        ensure  => installed,
-        require => Package['php5', 'libcurl3', 'libcurl3-dev']
-    }
+    $modules = [
+        'php5-curl',
+        'php5-xdebug',
+        'php5-xsl',
+        'php5-mysql'
+    ]
 
-    package { 'php5-xdebug':
-        ensure  => installed,
-        require => Package['php5']
-    }
-
-    package { 'php5-xsl':
-        ensure  => installed,
-        require => Package['php5']
-    }
-
-    package { 'php5-mysql':
-        ensure  => installed,
-        require => Package['php5']
-    }
+    ensure_packages($modules)
 
     file_line { 'php5_apache2_short_open_tag':
         path    => '/etc/php5/apache2/php.ini',

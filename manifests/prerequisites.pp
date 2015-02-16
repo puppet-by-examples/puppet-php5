@@ -12,8 +12,8 @@ class php5::prerequisites {
     include stdlib
 
     if (
-        ($::operatingsystem == "Ubuntu") and
-        ($::operatingsystemrelease == "14.04")
+        ($::operatingsystem == 'Ubuntu') and
+        ($::operatingsystemrelease == '14.04')
     ) {
 
         $deps = [
@@ -25,8 +25,8 @@ class php5::prerequisites {
         ]
 
     } elsif (
-        ($::operatingsystem == "Ubuntu") and
-        ($::operatingsystemrelease == "12.04")
+        ($::operatingsystem == 'Ubuntu') and
+        ($::operatingsystemrelease == '12.04')
     ) {
 
         $deps = [
