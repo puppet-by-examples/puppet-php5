@@ -31,12 +31,10 @@ class php5 {
 
     exec { 'php5:update-php-add-repository':
         command => 'add-apt-repository ppa:ondrej/php5',
-        path    => '/usr/bin:/usr/sbin:/bin',
         require => Class['php5::prerequisites']
     }
 
     exec { 'php5:apt-get-update':
-        path    => '/usr/bin',
         command => 'apt-get update -y',
         require => Exec['php5:update-php-add-repository']
     }
