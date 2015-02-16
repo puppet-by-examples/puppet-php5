@@ -1,0 +1,162 @@
+
+
+#
+# Log produced by: puppet-modules-factory
+# For more info: https://github.com/puppet-by-examples/puppet-modules-factory
+#
+
+
+start_date: 2015-02-16
+start_time: 18:19:37
+module: gajdaw-php5
+version: v0.2.1
+testsuite: tests/gajdaw-php5/*
+testfiles: 'tests/gajdaw-php5/vm-tests'
+
+tests:
+
+
+    -
+        start_date: 2015-02-16
+        start_time: 18:19:37
+        vagrantfile: tests/gajdaw-php5/vm-tests/ubuntu-12-04
+        output: '
+
+Ubuntu
+12.04
+
+Puppet version 3.7.4
+Ruby version ruby 1.8.7 (2011-06-30 patchlevel 352) [i686-linux]
+Notice: Compiled catalog for ubuntu1204-i386 in environment production in 0.80 seconds
+Notice: /Stage[main]/Php5::Prerequisites/Package[python-software-properties]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5::Prerequisites/Package[libcurl3-dev]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5::Prerequisites/Package[acl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-mysql]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-xdebug]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-xsl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-curl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Exec[php5:update-php-add-repository]/returns: executed successfully
+Notice: /Stage[main]/Php5/Exec[php5:apt-get-update]/returns: executed successfully
+Notice: /Stage[main]/Php5/Package[php5]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-size]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php5_cli_date_timezone]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php5_apache2_date_timezone]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-ttl]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php-cli-phar-readonly]/ensure: created
+Notice: Finished catalog run in 46.63 seconds
+PHP 5.5.21-1+deb.sury.org~precise+2 (cli) (built: Jan 26 2015 20:02:58) 
+Copyright (c) 1997-2014 The PHP Group
+Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
+    with Zend OPcache v7.0.4-dev, Copyright (c) 1999-2014, by Zend Technologies
+
+        '
+
+    -
+        start_date: 2015-02-16
+        start_time: 18:20:59
+        vagrantfile: tests/gajdaw-php5/vm-tests/ubuntu-14-04
+        output: '
+
+Ubuntu
+14.04
+
+Puppet version 3.7.4
+Ruby version ruby 1.9.3p484 (2013-11-22 revision 43786) [i686-linux]
+Notice: Compiled catalog for ubuntu1404-i386 in environment production in 0.68 seconds
+Notice: /Stage[main]/Php5::Prerequisites/Package[libcurl3-dev]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5::Prerequisites/Package[acl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5::Prerequisites/Package[software-properties-common]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-mysql]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-xdebug]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-xsl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-curl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Exec[php5:update-php-add-repository]/returns: executed successfully
+Notice: /Stage[main]/Php5/Exec[php5:apt-get-update]/returns: executed successfully
+Notice: /Stage[main]/Php5/Package[php5]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-size]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php5_cli_date_timezone]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php5_apache2_date_timezone]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-ttl]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php-cli-phar-readonly]/ensure: created
+Notice: Finished catalog run in 82.49 seconds
+PHP 5.5.21-1+deb.sury.org~trusty+2 (cli) (built: Jan 26 2015 19:57:38) 
+Copyright (c) 1997-2014 The PHP Group
+Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
+    with Zend OPcache v7.0.4-dev, Copyright (c) 1999-2014, by Zend Technologies
+    with Xdebug v2.2.5, Copyright (c) 2002-2014, by Derick Rethans
+
+        '
+
+    -
+        start_date: 2015-02-16
+        start_time: 18:22:59
+        vagrantfile: tests/gajdaw-php5/vm-tests/ubuntu-precise32
+        output: '
+
+Ubuntu
+12.04
+
+Puppet version 3.7.4
+Ruby version ruby 1.8.7 (2011-06-30 patchlevel 352) [i686-linux]
+Notice: Compiled catalog for vagrant-ubuntu-precise-32 in environment production in 0.43 seconds
+Notice: /Stage[main]/Php5::Prerequisites/Package[libcurl3-dev]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5::Prerequisites/Package[acl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-mysql]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-xdebug]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-xsl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-curl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Exec[php5:update-php-add-repository]/returns: executed successfully
+Notice: /Stage[main]/Php5/Exec[php5:apt-get-update]/returns: executed successfully
+Notice: /Stage[main]/Php5/Package[php5]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-size]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php5_cli_date_timezone]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php5_apache2_date_timezone]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-ttl]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php-cli-phar-readonly]/ensure: created
+Notice: Finished catalog run in 75.41 seconds
+PHP 5.5.21-1+deb.sury.org~precise+2 (cli) (built: Jan 26 2015 20:02:58) 
+Copyright (c) 1997-2014 The PHP Group
+Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
+    with Zend OPcache v7.0.4-dev, Copyright (c) 1999-2014, by Zend Technologies
+
+        '
+
+    -
+        start_date: 2015-02-16
+        start_time: 18:25:17
+        vagrantfile: tests/gajdaw-php5/vm-tests/ubuntu-trusty32
+        output: '
+
+Ubuntu
+14.04
+
+Puppet version 3.7.4
+Ruby version ruby 1.9.3p484 (2013-11-22 revision 43786) [i686-linux]
+Notice: Compiled catalog for vagrant-ubuntu-trusty-32 in environment production in 0.72 seconds
+Notice: /Stage[main]/Php5::Prerequisites/Package[libcurl3-dev]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5::Prerequisites/Package[acl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-mysql]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-xdebug]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-xsl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-curl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Exec[php5:update-php-add-repository]/returns: executed successfully
+Notice: /Stage[main]/Php5/Exec[php5:apt-get-update]/returns: executed successfully
+Notice: /Stage[main]/Php5/Package[php5]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-size]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php5_cli_date_timezone]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php5_apache2_date_timezone]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-ttl]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php-cli-phar-readonly]/ensure: created
+Notice: Finished catalog run in 117.20 seconds
+PHP 5.5.21-1+deb.sury.org~trusty+2 (cli) (built: Jan 26 2015 19:57:38) 
+Copyright (c) 1997-2014 The PHP Group
+Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
+    with Zend OPcache v7.0.4-dev, Copyright (c) 1999-2014, by Zend Technologies
+    with Xdebug v2.2.5, Copyright (c) 2002-2014, by Derick Rethans
+
+        '
+
+
+
+stop_date: 2015-02-16
+stop_time: 18:28:45
