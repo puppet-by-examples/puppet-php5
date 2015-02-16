@@ -48,7 +48,7 @@ class php5 {
 
     package { 'php5-curl':
         ensure  => installed,
-        require => Package['php5', 'libcurl3', 'libcurl3-dev']
+        require => Package['php5']
     }
 
     package { 'php5-xdebug':
