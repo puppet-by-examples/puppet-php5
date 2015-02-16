@@ -1,3 +1,12 @@
+# == Class: php5
+#
+# Class to install php5 from ppa:ondrej/php5.
+#
+# Parameters:
+#
+# None
+#
+
 class php5 {
 
     # validate_platform() function comes from
