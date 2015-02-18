@@ -17,11 +17,7 @@ class php5::prerequisites {
     ) {
 
         $deps = [
-            'software-properties-common',
-            'curl',
-            'libcurl3',
-            'libcurl3-dev',
-            'acl'
+            'software-properties-common'
         ]
 
     } elsif (
@@ -30,15 +26,20 @@ class php5::prerequisites {
     ) {
 
         $deps = [
-            'python-software-properties',
-            'curl',
-            'libcurl3',
-            'libcurl3-dev',
-            'acl'
+            'python-software-properties'
         ]
 
     }
 
     ensure_packages($deps)
+
+    $common_deps = [
+        'curl',
+        'libcurl3',
+        'libcurl3-dev',
+        'acl'
+    ]
+
+    ensure_packages($common_deps)
 
 }
