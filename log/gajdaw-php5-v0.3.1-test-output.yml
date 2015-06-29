@@ -1,0 +1,58 @@
+
+
+#
+# Log produced by: puppet-modules-factory
+# For more info: https://github.com/puppet-by-examples/puppet-modules-factory
+#
+
+
+start_date: 2015-06-29
+start_time: 10:54:47
+module: gajdaw-php5
+version: v0.3.1
+testsuite: tests/gajdaw-php5/*
+testfiles: 'tests/gajdaw-php5/ubuntu-12-04 tests/gajdaw-php5/vm-tests'
+
+tests:
+
+
+    -
+        start_date: 2015-06-29
+        start_time: 10:54:47
+        vagrantfile: tests/gajdaw-php5/vm-tests/ubuntu-14-04
+        output: '
+
+Ubuntu
+14.04
+
+Puppet version 3.7.5
+Ruby version ruby 1.9.3p484 (2013-11-22 revision 43786) [i686-linux]
+Notice: Compiled catalog for vagrant.kul.lublin.pl in environment production in 0.75 seconds
+Notice: /Stage[main]/Php5::Prerequisites/Package[libcurl3-dev]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5::Prerequisites/Package[acl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5::Prerequisites/Package[software-properties-common]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-mysql]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-xdebug]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-xsl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Package[php5-curl]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/Exec[php5:update-php-add-repository]/returns: executed successfully
+Notice: /Stage[main]/Php5/Exec[php5:apt-get-update]/returns: executed successfully
+Notice: /Stage[main]/Php5/Package[php5]/ensure: ensure changed "purged" to "present"
+Notice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-size]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php5_cli_date_timezone]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php5_apache2_date_timezone]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php-apache-realpath-cache-ttl]/ensure: created
+Notice: /Stage[main]/Php5/File_line[php-cli-phar-readonly]/ensure: created
+Notice: Finished catalog run in 24.47 seconds
+PHP 5.5.26-1+deb.sury.org~trusty+1 (cli) (built: Jun 15 2015 10:08:52) 
+Copyright (c) 1997-2015 The PHP Group
+Zend Engine v2.5.0, Copyright (c) 1998-2015 Zend Technologies
+    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2015, by Zend Technologies
+    with Xdebug v2.3.2, Copyright (c) 2002-2015, by Derick Rethans
+
+        '
+
+
+
+stop_date: 2015-06-29
+stop_time: 10:56:24
