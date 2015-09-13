@@ -104,13 +104,16 @@ class php5 {
 
     file_line { 'php-log-errors':
         path    => '/etc/php5/apache2/php.ini',
+        match   => 'log_errors =',
         line    => 'log_errors = On',
         require => Package['php5'],
     }
 
     file_line { 'php-error-log':
         path    => '/etc/php5/apache2/php.ini',
+        match   => ';error_log =',
         line    => 'error_log = /tmp/php_errors.log',
+        multiple => true,
         require => Package['php5'],
     }
 
