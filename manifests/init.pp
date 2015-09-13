@@ -102,17 +102,34 @@ class php5 {
         require => Package['php5'],
     }
 
-    file_line { 'php-log-errors':
+    # not necessary?
+    file_line { 'php-apache-log-errors':
         path    => '/etc/php5/apache2/php.ini',
         match   => 'log_errors =',
         line    => 'log_errors = On',
         require => Package['php5'],
     }
 
-    file_line { 'php-error-log':
+    # not necessary?
+    file_line { 'php-cli-log-errors':
+        path    => '/etc/php5/cli/php.ini',
+        match   => 'log_errors =',
+        line    => 'log_errors = On',
+        require => Package['php5'],
+    }
+
+    file_line { 'php-apache-error-log':
         path    => '/etc/php5/apache2/php.ini',
         match   => ';error_log =',
-        line    => 'error_log = /tmp/php_errors.log',
+        line    => 'error_log = /tmp/php_apache_errors.log',
+        multiple => true,
+        require => Package['php5'],
+    }
+
+    file_line { 'php-cli-error-log':
+        path    => '/etc/php5/cli/php.ini',
+        match   => ';error_log =',
+        line    => 'error_log = /tmp/php_cli_errors.log',
         multiple => true,
         require => Package['php5'],
     }
