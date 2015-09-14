@@ -134,4 +134,18 @@ class php5 {
         require => Package['php5'],
     }
 
+    file_line { 'php-apache-memory-limit':
+        path    => '/etc/php5/apache2/php.ini',
+        match   => '^memory_limit = ',
+        line    => 'memory_limit = 1024M',
+        multiple => true,
+    }
+
+    file_line { 'php-cli-memory-limit':
+        path    => '/etc/php5/cli/php.ini',
+        match   => '^memory_limit = ',
+        line    => 'memory_limit = 1024M',
+        multiple => true,
+    }
+
 }
