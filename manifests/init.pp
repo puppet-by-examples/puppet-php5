@@ -150,4 +150,12 @@ class php5 {
         require  => Package['php5'],
     }
 
+    file_line { 'php-cli-xdebug-max-nesting-level':
+        path     => '/etc/php5/cli/php.ini',
+        match    => '^xdebug.max_nesting_level',
+        line     => 'xdebug.max_nesting_level = 1000',
+        multiple => true,
+        require  => Package['php5'],
+    }
+
 }
