@@ -1,7 +1,3 @@
-#
-# This definition should be named filefetcher::multi_fetch
-#
-
 define php5::vhosts () {
 
     include stdlib
