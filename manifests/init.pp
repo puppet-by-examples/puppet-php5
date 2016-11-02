@@ -30,7 +30,7 @@ class php5 {
     class { 'php5::prerequisites': }
 
     exec { 'php5:update-php-add-repository':
-        command => 'add-apt-repository ppa:ondrej/php5',
+        command => 'add-apt-repository ppa:ondrej/php5-5.6',
         require => Class['php5::prerequisites']
     }
 
