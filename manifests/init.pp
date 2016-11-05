@@ -48,7 +48,8 @@ class php5 {
         'php5-curl',
         'php5-xdebug',
         'php5-xsl',
-        'php5-mysql'
+        'php5-mysql',
+        'php5-pgsql'
     ]
 
     ensure_packages($modules)
