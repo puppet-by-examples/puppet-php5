@@ -44,15 +44,34 @@ class php5 {
         require => Exec['php5:apt-get-update']
     }
 
-    $modules = [
-        'php5-curl',
-        'php5-xdebug',
-        'php5-xsl',
-        'php5-mysql',
-        'php5-pgsql',
-        'php5.6-xml'
-    ]
+    package { 'php5.6-curl':
+        ensure  => installed,
+        require => Package['php5.6']
+    }
 
-    ensure_packages($modules)
+    package { 'php5.6-xdebug':
+        ensure  => installed,
+        require => Package['php5.6']
+    }
+
+    package { 'php5.6-xsl':
+        ensure  => installed,
+        require => Package['php5.6']
+    }
+
+    package { 'php5.6-mysql':
+        ensure  => installed,
+        require => Package['php5.6']
+    }
+
+    package { 'php5.6-pgsql':
+        ensure  => installed,
+        require => Package['php5.6']
+    }
+
+    package { 'php5.6-xml':
+        ensure  => installed,
+        require => Package['php5.6']
+    }
 
 }
