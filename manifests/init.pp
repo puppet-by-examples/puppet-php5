@@ -49,7 +49,8 @@ class php5 {
         'php5-xdebug',
         'php5-xsl',
         'php5-mysql',
-        'php5-pgsql'
+        'php5-pgsql',
+        'php5.6-xml'
     ]
 
     ensure_packages($modules)
