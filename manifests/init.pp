@@ -30,7 +30,7 @@ class php5 {
     class { 'php5::prerequisites': }
 
     exec { 'php5:update-php-add-repository':
-        command => 'add-apt-repository ppa:ondrej/php',
+        command => 'yes | add-apt-repository ppa:ondrej/php',
         require => Class['php5::prerequisites']
     }
 
@@ -39,39 +39,44 @@ class php5 {
         require => Exec['php5:update-php-add-repository']
     }
 
-    package { 'php5.6':
+    package { 'libapache2-mod-php5.6':
         ensure  => installed,
         require => Exec['php5:apt-get-update']
     }
 
     package { 'php5.6-curl':
         ensure  => installed,
-        require => Package['php5.6']
+        require => Package['libapache2-mod-php5.6']
     }
 
     package { 'php5.6-xdebug':
         ensure  => installed,
-        require => Package['php5.6']
+        require => Package['libapache2-mod-php5.6']
     }
 
     package { 'php5.6-xsl':
         ensure  => installed,
-        require => Package['php5.6']
+        require => Package['libapache2-mod-php5.6']
     }
 
     package { 'php5.6-mysql':
         ensure  => installed,
-        require => Package['php5.6']
+        require => Package['libapache2-mod-php5.6']
     }
 
     package { 'php5.6-pgsql':
         ensure  => installed,
-        require => Package['php5.6']
+        require => Package['libapache2-mod-php5.6']
     }
 
     package { 'php5.6-xml':
         ensure  => installed,
-        require => Package['php5.6']
+        require => Package['libapache2-mod-php5.6']
+    }
+
+    package { 'php5.6-mbstring':
+        ensure  => installed,
+        require => Package['libapache2-mod-php5.6']
     }
 
 }
